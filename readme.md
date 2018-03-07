@@ -1,5 +1,5 @@
 
-# REST API with Lumen 5.5 [![Build Status](https://travis-ci.org/hasib32/rest-api-with-lumen.svg?branch=master)](https://travis-ci.org/hasib32/rest-api-with-lumen)
+# REST API with Lumen 5.6 [![Build Status](https://travis-ci.org/xuanhoa88/lumen-boilerplate.svg?branch=master)](https://travis-ci.org/xuanhoa88/lumen-boilerplate)
 
 A RESTful API boilerplate for Lumen micro-framework. Features included:
 
@@ -21,15 +21,15 @@ A RESTful API boilerplate for Lumen micro-framework. Features included:
 ## Getting Started
 First, clone the repo:
 ```bash
-$ git clone git@github.com:hasib32/rest-api-with-lumen.git
+$ git clone git@github.com:xuanhoa88/lumen-boilerplate.git
 ```
 
 #### Laravel Homestead
-You can use Laravel Homestead globally or per project for local development. Follow the [Installation Guide](https://laravel.com/docs/5.5/homestead#installation-and-setup).
+You can use Laravel Homestead globally or per project for local development. Follow the [Installation Guide](https://laravel.com/docs/5.6/homestead#installation-and-setup).
 
 #### Install dependencies
 ```
-$ cd rest-api-with-lumen
+$ cd lumen-boilerplate
 $ composer install
 ```
 
@@ -48,12 +48,7 @@ $ mysql -uhomestead -psecret
 
 Then create a database:
 ```bash
-mysql> CREATE DATABASE restapi;
-```
-
-And also create test database:
-```bash
-mysql> CREATE DATABASE restapi_test;
+mysql> CREATE DATABASE lumen-rest.test;
 ```
 
 Run the Artisan migrate command with seed:
@@ -119,7 +114,7 @@ $route->delete('messages/{id}', [
 ]);
 ```
 
-For more info please visit Lumen [Routing](https://lumen.laravel.com/docs/5.5/routing) page.
+For more info please visit Lumen [Routing](https://lumen.laravel.com/docs/5.6/routing) page.
 
 ### Step 2: Create Model and Migration for the Table
 Create ```Message``` Model inside ```App/Models``` directory and create migration using Lumen Artisan command.
@@ -156,7 +151,7 @@ class Message extends Model
 }
 ```
 
-Visit Laravel [Eloquent](https://laravel.com/docs/5.5/eloquent) Page for more info about Model.
+Visit Laravel [Eloquent](https://laravel.com/docs/5.6/eloquent) Page for more info about Model.
 
 **Create migration for messages table**
 
@@ -187,7 +182,7 @@ class CreateMessagesTable extends Migration
 }
 ```
 
-For more info visit Laravel [Migration](https://laravel.com/docs/5.5/migrations) page.
+For more info visit Laravel [Migration](https://laravel.com/docs/5.6/migrations) page.
 
 ### Step 3: Create Repository
 Create ```MessageRepository``` and implementation of the repository name ```EloquentMessageRepository```.
@@ -277,7 +272,7 @@ class RepositoriesServiceProvider extends ServiceProvider
 }
 ```
 
-Visit Lumen documentation for more info about [Service Provider](https://lumen.laravel.com/docs/5.5/providers).
+Visit Lumen documentation for more info about [Service Provider](https://lumen.laravel.com/docs/5.6/providers).
 
 ### Step 4: Create Fractal Transformer
 Fractal provides a presentation and transformation layer for complex data output, the like found in RESTful APIs, and works really well with JSON. Think of this as a view layer for your JSON/YAML/etc.
@@ -389,7 +384,7 @@ And add scopes to ``Passport::tokensCan``:
     'messages:delete' => 'Messages scope for deleting records'
 ]
 ```
-Visit Lumen [Authorization Page](https://lumen.laravel.com/docs/5.5/authorization) for more info about Policy.
+Visit Lumen [Authorization Page](https://lumen.laravel.com/docs/5.6/authorization) for more info about Policy.
 
 ### Last Step: Create Controller
  
@@ -578,7 +573,7 @@ class MessageController extends Controller
 }
 ```
 
-Visit Lumen [Controller](https://lumen.laravel.com/docs/5.5/controllers) page for more info about Controller.
+Visit Lumen [Controller](https://lumen.laravel.com/docs/5.6/controllers) page for more info about Controller.
 
 ## Tutorial
 To see the step-by-step tutorial how I created this boilerplate please visit our blog [devnootes.net](https://devnotes.net/rest-api-development-with-lumen-part-one/).
