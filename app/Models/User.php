@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
@@ -9,12 +8,15 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
+use Lumia\Uuid\HasUuid;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable, SoftDeletes, HasApiTokens;
+    use Authenticatable, Authorizable, SoftDeletes, HasApiTokens, HasUuid;
 
     const ADMIN_ROLE = 'ADMIN_USER';
+
     const BASIC_ROLE = 'BASIC_USER';
 
     /**
@@ -30,7 +32,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'uid',
+        'uuid',
         'firstName',
         'lastName',
         'middleName',
@@ -55,14 +57,26 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password'
     ];
 
     /**
+     *
      * @return bool
      */
     public function isAdmin()
     {
         return (isset($this->role) ? $this->role : self::BASIC_ROLE) == self::ADMIN_ROLE;
+    }
+
+    /**
+     * Sets password.
+     *
+     * @param string $value
+     * @return string
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
     }
 }

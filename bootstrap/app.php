@@ -1,7 +1,5 @@
 <?php
 
-use Dusterio\LumenPassport\LumenPassport;
-
 require_once __DIR__.'/../vendor/autoload.php';
 
 try {
@@ -92,7 +90,7 @@ $app->configure('database');
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(App\Providers\RepositoriesServiceProvider::class);
@@ -100,8 +98,6 @@ $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(Barryvdh\Cors\ServiceProvider::class);
 $app->register(\Illuminate\Mail\MailServiceProvider::class);
-
-LumenPassport::routes($app);
 
 /*
 |--------------------------------------------------------------------------

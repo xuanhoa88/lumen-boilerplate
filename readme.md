@@ -148,7 +148,7 @@ class Message extends Model
      * @var array
      */
     protected $fillable = [
-        'uid',
+        'uuid',
         'userId',
         'subject',
         'message',
@@ -172,7 +172,7 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('uid', 36)->unique();
+            $table->string('uuid', 36)->unique();
             $table->integer('userId')->unsigned();
             $table->string('subject')->nullable();
             $table->longText('message');
@@ -297,7 +297,7 @@ class MessageTransformer extends TransformerAbstract
     public function transform(Message $message)
     {
         return [
-            'id'        => $message->uid,
+            'id'        => $message->uuid,
             'userId'    => $message->userId,
             'subject'   => $message->subject,
             'message'   => $message->message,

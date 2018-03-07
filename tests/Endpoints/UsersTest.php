@@ -41,7 +41,7 @@ class UsersTest extends \TestCase
         $this->actingAs($user);
 
         // should work
-        $this->call('GET', '/users/'.$user->uid);
+        $this->call('GET', '/users/'.$user->uuid);
         $this->assertResponseStatus(200);
 
         // test json response
@@ -88,14 +88,14 @@ class UsersTest extends \TestCase
         $user = factory(User::class)->create();
 
         // without authentication should give 401 Unauthorized
-        $this->call('PUT', '/users/'.$user->uid, []);
+        $this->call('PUT', '/users/'.$user->uuid, []);
         $this->assertResponseStatus(401);
 
         // authenticate
         $user->withAccessToken(new Token(['scopes' => ['*']]));
         $this->actingAs($user);
 
-        $this->call('PUT', '/users/'.$user->uid, [
+        $this->call('PUT', '/users/'.$user->uuid, [
             'firstName' => 'updated_first'
         ]);
         $this->assertResponseOk();
@@ -120,7 +120,7 @@ class UsersTest extends \TestCase
         $this->actingAs($user);
 
         // should work
-        $this->call('DELETE', '/users/'.$user->uid);
+        $this->call('DELETE', '/users/'.$user->uuid);
         $this->assertResponseStatus(204);
 
         // deleting invalid user should give 404

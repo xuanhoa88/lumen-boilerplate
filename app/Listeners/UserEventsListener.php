@@ -18,7 +18,7 @@ class UserEventsListener
     {
         $user = $event->user;
 
-        //send welcome email to the user
+        // send welcome email to the user
         Mail::to($user)->send(new WelcomeEmail($user));
     }
 

@@ -18,7 +18,7 @@ class ThrottleRequestsTest extends \TestCase
         $user = factory(User::class)->create();
         $this->actingAs($user);
 
-        $request = Request::create($this->prepareUrlForRequest('/users/' . $user->uid));
+        $request = Request::create($this->prepareUrlForRequest('/users/' . $user->uuid));
         $middleware = app(ThrottleRequests::class);
 
         $totalNumberOfRequest = 60;
@@ -54,7 +54,7 @@ class ThrottleRequestsTest extends \TestCase
         $this->actingAs($user);
 
         for ($i = 1; $i <= 65 ; $i++) {
-            $this->call('GET', '/users/' . $user->uid);
+            $this->call('GET', '/users/' . $user->uuid);
 
             // for greater than 60 (default limit), it will throttle
             if ($i > 60) {

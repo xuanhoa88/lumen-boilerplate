@@ -37,7 +37,7 @@ class EloquentUserRepositoryTest extends \TestCase
         $testUser = factory(User::class)->create();
 
         //first, check if it returns valid user
-        $user = $this->eloquentUserRepository->findOne($testUser->uid);
+        $user = $this->eloquentUserRepository->findOne($testUser->uuid);
         $this->assertInstanceOf(User::class, $user);
 
         //now check it returns null for gibberish data
@@ -50,7 +50,7 @@ class EloquentUserRepositoryTest extends \TestCase
         $testUser = factory(User::class)->create();
 
         //first, check if it returns valid user
-        $user = $this->eloquentUserRepository->findOneBy(['uid' => $testUser->uid]);
+        $user = $this->eloquentUserRepository->findOneBy(['uuid' => $testUser->uuid]);
         $this->assertInstanceOf(User::class, $user);
         $this->assertEquals($testUser->email, $user->email);
 
@@ -111,7 +111,7 @@ class EloquentUserRepositoryTest extends \TestCase
         ]);
 
         // First, test user instance
-        $user = $this->eloquentUserRepository->findOne($testUser->uid);
+        $user = $this->eloquentUserRepository->findOne($testUser->uuid);
         $this->assertInstanceOf(User::class, $user);
 
         // Update user
@@ -121,7 +121,7 @@ class EloquentUserRepositoryTest extends \TestCase
         ]);
 
         // Fetch the user again
-        $user = $this->eloquentUserRepository->findOne($testUser->uid);
+        $user = $this->eloquentUserRepository->findOne($testUser->uuid);
         $this->assertEquals('updated first_name', $user->firstName);
         $this->assertEquals('updated last_name', $user->lastName);
         $this->assertNotEquals('test_first', $user->firstName);
@@ -135,7 +135,7 @@ class EloquentUserRepositoryTest extends \TestCase
         $this->assertTrue($isDeleted);
 
         // confirm deleted
-        $user = $this->eloquentUserRepository->findOne($testUser->uid);
+        $user = $this->eloquentUserRepository->findOne($testUser->uuid);
         $this->assertNull($user);
     }
 }
