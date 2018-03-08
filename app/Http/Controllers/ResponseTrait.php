@@ -138,7 +138,7 @@ trait ResponseTrait
      */
     public function sendEmptyDataResponse()
     {
-        return response()->json(['data' => new \StdClass()]);
+        return response()->json(['data' => new \stdClass()]);
     }
 
     /**

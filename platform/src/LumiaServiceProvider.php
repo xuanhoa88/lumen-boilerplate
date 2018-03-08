@@ -19,11 +19,14 @@ class LumiaServiceProvider extends ServiceProvider
 
     protected function registerCommands()
     {
+        $this->commands(\Lumia\Console\KeyGenerateCommand::class);
         $this->commands(\Lumia\Console\RouteListCommand::class);
+        $this->commands(\Lumia\Console\VendorPublishCommand::class);
     }
 
     protected function registerServiceProviders()
     {
-        app()->register(\Lumia\Uuid\UuidServiceProvider::class);
+        $this->app->register(\Lumia\Uuid\UuidServiceProvider::class);
+        $this->app->register(\Lumia\Passport\PassportServiceProvider::class);
     }
 }

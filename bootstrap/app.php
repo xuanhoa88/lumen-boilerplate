@@ -3,8 +3,8 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 try {
-    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
-} catch (Dotenv\Exception\InvalidPathException $e) {
+    (new \Dotenv\Dotenv(__DIR__.'/../'))->load();
+} catch (\Dotenv\Exception\InvalidPathException $e) {
     //
 }
 
@@ -19,7 +19,7 @@ try {
 |
 */
 
-$app = new Laravel\Lumen\Application(
+$app = new \Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
@@ -39,23 +39,20 @@ $app = new Laravel\Lumen\Application(
 */
 
 $app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
+    \Illuminate\Contracts\Debug\ExceptionHandler::class,
+    \App\Exceptions\Handler::class
 );
 
 $app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
+    \Illuminate\Contracts\Console\Kernel::class,
+    \App\Console\Kernel::class
 );
 
-// load cors configurations
-$app->configure('cors');
-
-// load mail configurations
-$app->configure('mail');
-
-// load database configurations
-$app->configure('database');
+// load configurations
+foreach (['cors', 'mail', 'database'] as $config)
+{
+    $app->configure($config);
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -73,8 +70,8 @@ $app->configure('database');
  ]);
 
  $app->routeMiddleware([
-     'auth' => App\Http\Middleware\Authenticate::class,
-     'throttle' => App\Http\Middleware\ThrottleRequests::class,
+     'auth' => \App\Http\Middleware\Authenticate::class,
+     'throttle' => \App\Http\Middleware\ThrottleRequests::class,
      'scopes'   => \Laravel\Passport\Http\Middleware\CheckScopes::class,
      'scope'    => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class
  ]);
@@ -89,31 +86,13 @@ $app->configure('database');
 | totally optional, so you are not required to uncomment this line.
 |
 */
-
-$app->register(App\Providers\AppServiceProvider::class);
-$app->register(App\Providers\AuthServiceProvider::class);
-$app->register(App\Providers\EventServiceProvider::class);
-$app->register(App\Providers\RepositoriesServiceProvider::class);
-$app->register(Laravel\Passport\PassportServiceProvider::class);
-$app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
-$app->register(Barryvdh\Cors\ServiceProvider::class);
+$app->register(\Laravel\Passport\PassportServiceProvider::class);
+$app->register(\Barryvdh\Cors\ServiceProvider::class);
 $app->register(\Illuminate\Mail\MailServiceProvider::class);
-
-/*
-|--------------------------------------------------------------------------
-| Load The Application Routes
-|--------------------------------------------------------------------------
-|
-| Next we will include the routes file so that they can all be added to
-| the application. This will provide all of the URLs the application
-| can respond to, as well as the controllers that may handle them.
-|
-*/
-
-$app->router->group([
-    'namespace' => 'App\Http\Controllers'
-], function ($router) {
-    require __DIR__.'/../routes/web.php';
-});
+$app->register(\App\Providers\AppServiceProvider::class);
+$app->register(\App\Providers\AuthServiceProvider::class);
+$app->register(\App\Providers\EventServiceProvider::class);
+$app->register(\App\Providers\RouteServiceProvider::class);
+$app->register(\App\Providers\RepositoriesServiceProvider::class);
 
 return $app;

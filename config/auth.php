@@ -1,4 +1,4 @@
-<?php //config/auth.php
+<?php
 
 return [
     'defaults' => [

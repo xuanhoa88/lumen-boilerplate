@@ -9,28 +9,21 @@
  * | and give it the Closure to call when that URI is requested.
  * |
  */
+
 $router->get('/', function () {
     return app()->version();
 });
 
-// Generate random string
-$router->get('appKey', function () {
-    return str_random('32');
-});
-
-// route for creating access_token
-$router->post('accessToken', 'AccessTokenController@createAccessToken');
+// Registering passport routes
+\Lumia\Passport\Passport::routes($router->app);
 
 $router->group([
-    'middleware' => [
-        'auth:api',
-        'throttle:60'
-    ]
+    'middleware' => ['auth:api'],
+    'namespace' => 'App\Http\Controllers'
 ], function ($router) {
     // Users
     $router->group([
-        'prefix' => 'users',
-        'namespace' => '\App\Http\Controllers'
+        'prefix' => 'users'
     ], function ($router) {
         $router->post('/', [
             'uses' => 'UserController@store',

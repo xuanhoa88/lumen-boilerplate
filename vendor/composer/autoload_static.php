@@ -72,6 +72,7 @@ class ComposerStaticInit38db1c81c3f32d4c3a3c442d26f5fce5
             'Lumia\\' => 6,
             'League\\OAuth2\\Server\\' => 21,
             'League\\Fractal\\' => 15,
+            'League\\Flysystem\\' => 17,
             'League\\Event\\' => 13,
             'Lcobucci\\JWT\\' => 13,
             'Laravel\\Passport\\' => 17,
@@ -247,6 +248,10 @@ class ComposerStaticInit38db1c81c3f32d4c3a3c442d26f5fce5
         'League\\Fractal\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/fractal/src',
+        ),
+        'League\\Flysystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
         'League\\Event\\' => 
         array (
