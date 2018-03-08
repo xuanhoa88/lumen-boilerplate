@@ -46,7 +46,7 @@ class ClientController
     public function forUser(Request $request)
     {
         $userId = $request->user()->getKey();
-dd($userId);
+
         return $this->clients->activeForUser($userId)->makeVisible('secret');
     }
 

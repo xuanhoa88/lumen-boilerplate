@@ -9,16 +9,48 @@
  * | and give it the Closure to call when that URI is requested.
  * |
  */
-
 $router->get('/', function () {
     return app()->version();
 });
 
-// Registering passport routes
-\Lumia\Passport\Passport::routes($router->app);
+/**
+ * Authentication
+ */
+$router->group([
+    'namespace' => 'Lumia\Http\Controllers\Auth',
+    'prefix' => '/auth',
+    'as' => 'auth'
+], function ($router) {
+    $router->post('/login', [
+        'as' => 'login',
+        'uses' => 'LoginController@login'
+    ]);
+    $router->group([
+        'prefix' => '/password',
+        'as' => 'password'
+    ], function ($router) {
+        $router->post('/reset', [
+            'as' => 'reset',
+            'uses' => 'ResetPasswordController@reset'
+        ]);
+        $router->post('/forgot', [
+            'as' => 'forgot',
+            'uses' => 'ForgotPasswordController@forgot'
+        ]);
+    });
+    $router->post('/logout', [
+        'middleware' => [
+            'auth:api'
+        ],
+        'as' => 'logout',
+        'uses' => 'LogoutController@logout'
+    ]);
+});
 
 $router->group([
-    'middleware' => ['auth:api'],
+    'middleware' => [
+        'auth:api'
+    ],
     'namespace' => 'App\Http\Controllers'
 ], function ($router) {
     // Users

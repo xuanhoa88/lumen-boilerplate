@@ -1,5 +1,4 @@
 <?php
-
 namespace Lumia\Passport;
 
 use DateTimeInterface;
@@ -10,6 +9,7 @@ use Laravel\Lumen\Routing\Router;
 
 class Passport extends \Laravel\Passport\Passport
 {
+
     /**
      * Allow simultaneous logins for users
      *
@@ -43,48 +43,50 @@ class Passport extends \Laravel\Passport\Passport
     /**
      * Get or set when access tokens expire.
      *
-     * @param  \DateTimeInterface|null  $date
+     * @param \DateTimeInterface|null $date
      * @param int $clientId
      * @return \DateInterval|static
      */
     public static function tokensExpireIn(DateTimeInterface $date = null, $clientId = null)
     {
-        if (! $clientId) return static::tokensExpireIn($date);
-
+        if (! $clientId)
+            return static::tokensExpireIn($date);
+        
         if (is_null($date)) {
-            return isset(static::$tokensExpireAt[$clientId])
-                ? Carbon::now()->diff(static::$tokensExpireAt[$clientId])
-                : static::tokensExpireIn();
+            return isset(static::$tokensExpireAt[$clientId]) ? Carbon::now()->diff(static::$tokensExpireAt[$clientId]) : static::tokensExpireIn();
         } else {
             static::$tokensExpireAt[$clientId] = $date;
         }
-
-        return new static;
+        
+        return new static();
     }
 
     /**
      * Get a Passport route registrar.
      *
-     * @param  callable|Router|Application  $callback
-     * @param  array  $options
+     * @param callable|Router|Application $callback
+     * @param array $options
      * @return RouteRegistrar
      */
     public static function routes($callback = null, array $options = [])
     {
-        if ($callback instanceof Application && preg_match('/5\.[56]\..*/', $callback->version())) $callback = $callback->router;
-
+        if ($callback instanceof Application && preg_match('/5\.[56]\..*/', $callback->version()))
+            $callback = $callback->router;
+        
         $callback = $callback ?: function ($router) {
             $router->all();
         };
-
+        
         $defaultOptions = [
             'prefix' => 'oauth',
-            'namespace' => '\Laravel\Passport\Http\Controllers',
+            'namespace' => '\Laravel\Passport\Http\Controllers'
         ];
-
+        
         $options = array_merge($defaultOptions, $options);
-
-        $callback->group($options, function ($router) use ($callback, $options) {
+        
+        $callback->group(array_except($options, [
+            'namespace'
+        ]), function ($router) use ($callback, $options) {
             $routes = new RouteRegistrar($router, $options);
             $routes->all();
         });

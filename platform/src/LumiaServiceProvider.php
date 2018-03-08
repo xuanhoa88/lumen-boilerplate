@@ -27,6 +27,6 @@ class LumiaServiceProvider extends ServiceProvider
     protected function registerServiceProviders()
     {
         $this->app->register(\Lumia\Uuid\UuidServiceProvider::class);
-        $this->app->register(\Lumia\Passport\PassportServiceProvider::class);
+//         $this->app->register(\Lumia\Passport\PassportServiceProvider::class);
     }
 }
