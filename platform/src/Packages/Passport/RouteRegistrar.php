@@ -1,5 +1,5 @@
 <?php
-namespace Lumia\Passport;
+namespace Lumia\Packages\Passport;
 
 use Laravel\Lumen\Routing\Router;
 

@@ -1,18 +1,17 @@
 <?php
-
 return [
     'defaults' => [
-        'guard' => 'api',
-        'passwords' => 'users',
+        'guard' => 'oauth2',
+        'passwords' => 'users'
     ],
-
+    
     'guards' => [
-        'api' => [
+        'oauth2' => [
             'driver' => 'passport',
-            'provider' => 'users',
-        ],
+            'provider' => 'users'
+        ]
     ],
-
+    
     'providers' => [
         'users' => [
             'driver' => 'eloquent',

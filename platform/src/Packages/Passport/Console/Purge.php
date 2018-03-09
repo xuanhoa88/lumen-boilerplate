@@ -1,6 +1,6 @@
 <?php
 
-namespace Lumia\Passport\Console;
+namespace Lumia\Packages\Passport\Console;
 
 use Illuminate\Console\Command;
 use Laravel\Passport\ClientRepository;

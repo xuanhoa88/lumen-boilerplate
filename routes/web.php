@@ -40,16 +40,30 @@ $router->group([
     });
     $router->post('/logout', [
         'middleware' => [
-            'auth:api'
+            'auth'
         ],
         'as' => 'logout',
         'uses' => 'LogoutController@logout'
+    ]);
+    $router->post('/me', [
+        'middleware' => [
+            'auth'
+        ],
+        'as' => 'me',
+        'uses' => 'MeController@me'
+    ]);
+    $router->post('/token/refresh', [
+        'middleware' => [
+            'auth'
+        ],
+        'as' => 'token.refresh',
+        'uses' => 'RefreshTokenController@refresh'
     ]);
 });
 
 $router->group([
     'middleware' => [
-        'auth:api'
+        'auth'
     ],
     'namespace' => 'App\Http\Controllers'
 ], function ($router) {

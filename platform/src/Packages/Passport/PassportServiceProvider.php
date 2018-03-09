@@ -1,5 +1,5 @@
 <?php
-namespace Lumia\Passport;
+namespace Lumia\Packages\Passport;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Connection;
@@ -26,7 +26,7 @@ class PassportServiceProvider extends ServiceProvider
         
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Lumia\Passport\Console\Purge::class
+                \Lumia\Packages\Passport\Console\Purge::class
             ]);
         }
     }
@@ -47,6 +47,6 @@ class PassportServiceProvider extends ServiceProvider
         ]);
         
         // Register routes
-        \Lumia\Passport\Passport::routes($this->app);
+        \Lumia\Packages\Passport\Passport::routes($this->app);
     }
 }

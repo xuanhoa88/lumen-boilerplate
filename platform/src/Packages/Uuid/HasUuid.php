@@ -1,5 +1,5 @@
 <?php
-namespace Lumia\Uuid;
+namespace Lumia\Packages\Uuid;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;

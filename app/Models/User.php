@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
-use Lumia\Uuid\HasUuid;
+use Lumia\Packages\Uuid\HasUuid;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
